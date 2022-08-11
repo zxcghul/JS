@@ -1,15 +1,23 @@
-function main(object) {
-    if (typeof object !== 'string') {
-        alert("Неверный тип")
+
+let text = prompt('Введите текст:');
+let textSlice;
+
+function main(stringg) {
+    let txt, txtSlc;
+    txt = stringg.trim()
+    if (txt.length > 30) {
+        txtSlc = txt.slice(0, 30) + '...';
+        return txtSlc
+    }
+    else if (typeof txt !== 'string' || txt == '') {
+        alert("Неверный тип");
     }
     else {
-        if (object.length > 30) {
-            return object.slice(30) + "..." 
-        }
-        else {
-           return object.trim()
-        }
+        return txt
     }
 }
 
-console.log(main('objectobjectobjectobjectobjectobjectobjectobjectobjectobjectobjectobjectobjectobjectobject'));
+textSlice = main(text);
+alert('Cокращение: ' + textSlice + '\n' + 'Длина: ' + textSlice.length)
+
+
