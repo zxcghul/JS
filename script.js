@@ -15,22 +15,26 @@ const asking = function() {
 }
 
 const getAllServicePrices = function() {
-    let sum = 0
+    let sum1, sum2;
 
     for (let i = 0; i < 2; i++) {
         if (i === 0) {
             service1 = prompt('Какой дополнительный тип услуги нужен?')
+            do {
+                sum1 = +prompt('Сколько это будет стоить?')
+            } while (!isNumber(sum1)) //что введённые данные являются числом
         }
         if (i === 1) {
             service2 = prompt('Какой дополнительный тип услуги нужен?')
+            do {
+                sum2 = +prompt('Сколько это будет стоить?')
+            } while (isNaN(sum2) || sum2 == '') //что введённые данные являются числом
         }
-        do {
-            sum += +prompt('Сколько это будет стоить?')
-        } while (!isNumber(screenPrice)); //что введённые данные являются числом
+        
         
 
     }
-    return sum
+    return sum1 + sum2
 }
     
 
@@ -79,5 +83,5 @@ showTypeOf(adaptive);
 
 console.log(screens);
 
-console.log('Итоговая стоимость почсле вычета посреднику: ' + servicePercentPrice + 'р');
+console.log('Итоговая стоимость после вычета посреднику: ' + servicePercentPrice + 'р');
 getRollbackMessage();
