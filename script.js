@@ -3,13 +3,11 @@
 
 
 function RandomizeGame () {
+    alert('Угадай число от 1 до 100');
+
     let number,
-    quest = confirm('Угадай число от 1 до 100'),
     questAnswer;
 
-    if (quest == false) {
-        alert('Прощай((')
-    }
 
     function isNumber() {
         questAnswer = prompt('Введи своё число:');
@@ -17,7 +15,7 @@ function RandomizeGame () {
             return alert('Досвидания!');
         }
         if ((isNaN(parseFloat(questAnswer) && isFinite(questAnswer)) || questAnswer == "") == true) {
-            alert('Нужно ввести число!!')
+            alert('Нужно ввести число!!');
             return isNumber()
         }
          
@@ -28,16 +26,16 @@ function RandomizeGame () {
             return
         }
         if (questAnswer > number) {
-            alert('Загаданное число меньше!')
+            alert('Загаданное число меньше!');
             isNumber();
             return isAnswer()
         }
         if (questAnswer < number) {
-            alert('Загаданное число больше')
+            alert('Загаданное число больше');
             isNumber();
             return isAnswer()
         }
-        alert('Поздравляю, вы угадали!!')
+        alert('Поздравляю, вы угадали!!');
     }
     
     function getRandom(min, max) {
@@ -47,7 +45,7 @@ function RandomizeGame () {
     }
 
     number = getRandom(1, 100);
-    alert(number);
+    
     isNumber(questAnswer);
     isAnswer();
     
