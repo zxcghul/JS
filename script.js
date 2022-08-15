@@ -10,31 +10,27 @@ const asking = function() {
     screens = prompt('Какие типы экранов нужно разработать?');
     do {
         screenPrice = +prompt('Сколько будет стоить данная работа?')
-    } while (isNaN(screenPrice) || screenPrice == '');  //проверка на NaN и пустую строку
+    } while (!isNumber(screenPrice) || screenPrice == '');
     adaptive = confirm('Нужен ли адаптив на сайте?');
 }
 
 const getAllServicePrices = function() {
-    let sum1, sum2;
-
+    let sum2 = 0;
     for (let i = 0; i < 2; i++) {
+        let sum1;
         if (i === 0) {
             service1 = prompt('Какой дополнительный тип услуги нужен?')
-            do {
-                sum1 = +prompt('Сколько это будет стоить?')
-            } while (!isNumber(sum1)) //что введённые данные являются числом 
         }
         if (i === 1) {
             service2 = prompt('Какой дополнительный тип услуги нужен?')
-            do {
-                sum2 = +prompt('Сколько это будет стоить?')
-            } while (!isNumber(sum2)) //что введённые данные являются числом
         }
-        
-        
+        do {
+            sum1 = +prompt('Сколько это будет стоить?');
+        } while (!isNumber(sum1) || sum1 == '') //что введённые данные являются числом 
+        sum2 = sum2 + sum1;
 
     }
-    return sum1 + sum2
+    return sum2
 }
     
 
