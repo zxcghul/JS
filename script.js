@@ -20,7 +20,7 @@ function RandomizeGame () {
 
     function isNumber() {
         questAnswer = prompt('Введи своё число:');
-        if (questAnswer == null) {
+        if (questAnswer === null) {
             return alert('Досвидания!');
         }
         if ((isNaN(parseFloat(questAnswer) && isFinite(questAnswer)) || questAnswer == "") == true) {
@@ -31,7 +31,7 @@ function RandomizeGame () {
     }
 
     function isAnswer() {
-        if (attempts == 0) {
+        if (attempts === 0) {
             reboot();
         }
         if (questAnswer == null) {
