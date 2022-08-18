@@ -24,8 +24,12 @@ isNumber: function(num) {
 },
   
 isString: function(str) {
-  let splits = str.replace(/ /g,'');
-  return (isFinite(splits) || str.length === 0 || typeof str === "undefined")
+  if (str !== null) {
+    let splits = str.replace(/ /g,'');
+    return (isFinite(splits) || str.length === 0 || typeof str === "undefined")
+  }
+  if (str === null)
+  return (true)
 },
   
   
