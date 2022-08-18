@@ -14,37 +14,35 @@ const appData = {
   rollback: 10,
 
 logger: function() {
-
-for (let key in appData) {
-  console.log('Имя: ' + key + '\nСвойство: ' + appData[key] + '\n\n');
-}},
+  for (let key in appData) {
+    console.log('Имя: ' + key + '\nСвойство: ' + appData[key] + '\n\n');
+  }
+},
   
 isNumber: function(num) {
   return !isNaN(parseFloat(num) && isFinite(num))
 },
   
 isString: function(str) {
-  return str.search(/[A-Za-z]/g) === -1
+  let splits = str.replace(/ /g,'');
+  return (isFinite(splits) || str.length === 0 || typeof str === "undefined")
 },
   
-isSpaceString: function(str) {
-  return !str || str.length === 0
-},
   
 asking: function() {
-do {
-  appData.title = prompt('Как будет называться ваш проект?');
-} while (appData.isString(appData.title));
+  do {
+    appData.title = prompt('Как будет называться ваш проект?');
+  } while (appData.isString(appData.title));
   
-do {
-  appData.screens = prompt('Какие типы экранов нужно разработать?');
-} while (appData.isString(appData.screens))
+  do {
+    appData.screens = prompt('Какие типы экранов нужно разработать?');
+  } while (appData.isString(appData.screens))
   
-do {
-  appData.screenPrice = +prompt('Сколько будет стоить данная работа?')
-} while (!appData.isNumber(appData.screenPrice) || appData.isSpaceString(appData.screenPrice));
+  do {
+    appData.screenPrice = +prompt('Сколько будет стоить данная работа?')
+  } while (!appData.isNumber(appData.screenPrice));
 
-appData.adaptive = confirm('Нужен ли адаптив на сайте?');
+  appData.adaptive = confirm('Нужен ли адаптив на сайте?');
 },
   
 getAllServicePrices: function() {
@@ -63,7 +61,7 @@ getAllServicePrices: function() {
     }
     do {
       sumFor = +prompt('Сколько это будет стоить?');
-    } while (!appData.isNumber(sumFor) || appData.isSpaceString(sumFor)) //что введённые данные являются числом
+    } while (!appData.isNumber(sumFor)) //что введённые данные являются числом
     sumStart = sumStart + sumFor;
   }
   return sumStart
