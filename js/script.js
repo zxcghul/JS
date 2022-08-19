@@ -1,16 +1,13 @@
 
 const calcTitle = document.getElementsByTagName('h1')[0],
-  buttons = document.getElementsByClassName('handler_btn'),
+  [buttonStart, buttonReset] = [document.getElementsByClassName('handler_btn')[0], document.getElementsByClassName('handler_btn')[1]],
   buttonPlus = document.querySelector('.screen-btn'),
   allPercent = document.querySelectorAll('.percent'),
   allNumber = document.querySelectorAll('.number'),
   rollbackTypeRange = document.querySelector('.rollback input[type=range]'),
   rollbackSpan = document.querySelector('.rollback .range-value'),
   totalInput = document.getElementsByClassName('total-input'),
-  totalElem = [];
-for (let i = 0; i < totalInput.length; i++) {
-  totalElem.push(totalInput[i]);
-};
+  [total, totalCount, totalCountOther, totalFullCount, totalCountRollback] = [document.getElementsByClassName('total-input')[0], document.getElementsByClassName('total-input')[1], document.getElementsByClassName('total-input')[2], document.getElementsByClassName('total-input')[3], document.getElementsByClassName('total-input')[4]];
 let screenClass = document.querySelectorAll('.screen');
 
 // const appData = {
