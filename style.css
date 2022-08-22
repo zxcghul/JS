@@ -35,6 +35,9 @@ body {
   background-repeat: no-repeat;
   z-index: 1;
 }
+.body__active {
+  background-image: url(./image/adv.jpg);
+}
 
 
 h1, h2 {
