@@ -27,20 +27,19 @@ const appData = {
   screens: [],
   screenPrice: 0,
   adaptive: true,
-  rollback: 10,
+  rollback: 0,
   count: 0,
 
 init: function() {
   appData.addTitle();
   buttonStart.addEventListener('click', function() {
     let i=0;
-    screenClass = document.querySelectorAll('.screen');
+    screenClass = document.querySelectorAll('.screen')
     selectInput = document.querySelectorAll('.screen .main-controls__select select[name="views-select"]');
-    selectInputValue = document.querySelectorAll('.screen .main-controls__input input[type="text"]');
+    selectInputValue = document.querySelectorAll('.screen .main-controls__input input[type="text"]')
     screenClass.forEach(function(item, index) {
       if ((selectInput[index].value === '') || (selectInputValue[index].value === '')) {
         index++
-
         return alert('Введите все данные у ' + index + '-й строки') 
       }
       i++; 
@@ -50,7 +49,6 @@ init: function() {
     }
   });
   buttonPlus.addEventListener('click', appData.addScreenBlock)
-
   range.addEventListener('input', appData.step)
 },
 
@@ -90,8 +88,12 @@ addServices: function() {
 },
 
 addScreenBlock: function() {
-  const cloneScreen = screenClass[0].cloneNode(true);
+  
+  screenClass = document.querySelectorAll('.screen');
+  let cloneScreen = screenClass[0].cloneNode(true);
+  cloneScreen.querySelector('.screen .main-controls__input input[type="text"]').value = ""
   screenClass[screenClass.length - 1].after(cloneScreen)
+  
 },
 
 addTitle: function () {
@@ -111,7 +113,6 @@ addScreens: function() {
         price: +select.value * +input.value
       })
   })
-  console.log(appData.screens);
 },
 
 logger: function() {
