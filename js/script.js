@@ -190,9 +190,7 @@ reset: function() {
       totalFullCount.value = 0;
       totalCountRollback.value = 0;
       totalCount.value = 0;
-      // appData.forEach((item) => {
-      //   console.log(item);
-      // })
+
     });
     console.log(screenClass);
     buttonReset.style.display = 'none';
