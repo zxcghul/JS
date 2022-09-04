@@ -41,6 +41,9 @@ init: function() {
   buttonPlus.addEventListener('click', () => {
     this.addScreenBlock();
   });
+  buttonReset.addEventListener('click', () => {
+    this.reset()
+  });
   range.addEventListener('input', this.step);
 },
 
@@ -50,6 +53,8 @@ validation: function (item, index) {
   }
   i++; 
   if (i === selectInputValue.length) {
+    buttonReset.style.display = 'block';
+    buttonStart.style.display = 'none';
     this.start()
   }
 },
@@ -65,7 +70,7 @@ adder: function () {
   selectInput = document.querySelectorAll('.screen .main-controls__select select[name="views-select"]');
   selectInputValue = document.querySelectorAll('.screen .main-controls__input input[type="text"]');
   console.log(this);
-  this.check()
+  this.check();
 },
 
 step: function (event) {
@@ -168,6 +173,31 @@ getServicePercentPrices: function() {
   
 showTypeOf: function(variabel) {
   console.log(variabel, typeof variabel);
+},
+
+reset: function() {
+
+    console.log(this.screens);
+    screenClass.forEach((item, index) => {
+      if (index !== 0) {
+        screenClass[index].remove()
+      }
+      screenClass[0].querySelector('.screen .main-controls__input input[type="text"]').value = "";
+      screenClass[0].querySelector('.screen .main-controls__select select[name="views-select"]').value = "";
+      this.screens = [];
+      total.value = 0;
+      totalCountOther.value = 0;
+      totalFullCount.value = 0;
+      totalCountRollback.value = 0;
+      totalCount.value = 0;
+      // appData.forEach((item) => {
+      //   console.log(item);
+      // })
+    });
+    console.log(screenClass);
+    buttonReset.style.display = 'none';
+    buttonStart.style.display = 'block';
+
 },
   
 start: function() {
