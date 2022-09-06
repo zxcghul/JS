@@ -55,8 +55,27 @@ validation: function (item, index) {
   if (i === selectInputValue.length) {
     buttonReset.style.display = 'block';
     buttonStart.style.display = 'none';
-    this.start()
+    this.disabOn();
+    this.start();
   }
+},
+
+disabOn: function () {
+  selectInput.forEach((item) => {
+    item.disabled = true;
+  })
+  selectInputValue.forEach((item) => {
+    item.disabled = true;
+  })
+},
+
+disabOff: function () {
+  selectInput.forEach((item) => {
+    item.disabled = false;
+  })
+  selectInputValue.forEach((item) => {
+    item.disabled = false;
+  })
 },
 
 check: function () {
@@ -71,6 +90,31 @@ adder: function () {
   selectInputValue = document.querySelectorAll('.screen .main-controls__input input[type="text"]');
   console.log(this);
   this.check();
+
+},
+
+resetValue: function () {
+  screenClass[0].querySelector('.screen .main-controls__input input[type="text"]').value = "";
+  screenClass[0].querySelector('.screen .main-controls__select select[name="views-select"]').value = "";
+  this.screens = [];
+  this.servicePricesPercent = 0;
+  this.servicePricesNumber = 0;
+  this.fullPrice = 0;
+  this.servicePercentPrice = 0;
+  this.servicesPercent = {};
+  this.servicesNumber = {};
+  this.title = '';
+  this.screens = [];
+  this.screenPrice = 0;
+  this.adaptive = true;
+  this.rollback = 0;
+  this.count = 0;
+  total.value = 0;
+  totalCountOther.value = 0;
+  totalFullCount.value = 0;
+  totalCountRollback.value = 0;
+  totalCount.value = 0;
+
 },
 
 step: function (event) {
@@ -150,6 +194,7 @@ isString: function(str) {
 addPrices: function() {
   selectInputValue.forEach((item) => {
     this.count += +item.value;
+    
   })
   for  (let screen of this.screens) {
     this.screenPrice += +screen.price;
@@ -182,15 +227,8 @@ reset: function() {
       if (index !== 0) {
         screenClass[index].remove()
       }
-      screenClass[0].querySelector('.screen .main-controls__input input[type="text"]').value = "";
-      screenClass[0].querySelector('.screen .main-controls__select select[name="views-select"]').value = "";
-      this.screens = [];
-      total.value = 0;
-      totalCountOther.value = 0;
-      totalFullCount.value = 0;
-      totalCountRollback.value = 0;
-      totalCount.value = 0;
-
+      this.disabOff();
+      this.resetValue();
     });
     console.log(screenClass);
     buttonReset.style.display = 'none';
