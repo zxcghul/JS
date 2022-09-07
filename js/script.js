@@ -35,6 +35,9 @@ const appData = {
 
 init: function() {
   this.addTitle();
+  range.addEventListener('input', () => {
+    this.step();
+  });
   buttonStart.addEventListener('click', () => {
     this.adder();
   });
@@ -44,7 +47,7 @@ init: function() {
   buttonReset.addEventListener('click', () => {
     this.reset()
   });
-  range.addEventListener('input', this.step);
+  
 },
 
 validation: function (item, index) {
@@ -63,23 +66,28 @@ validation: function (item, index) {
 disabOn: function () {
   selectInput.forEach((item) => {
     item.disabled = true;
-  })
+  });
   selectInputValue.forEach((item) => {
     item.disabled = true;
-  })
+  });
+  rollbackTypeRange.disabled = true;
+  buttonPlus.disabled = true;
 },
 
 disabOff: function () {
   selectInput.forEach((item) => {
     item.disabled = false;
-  })
+  });
   selectInputValue.forEach((item) => {
     item.disabled = false;
-  })
+  });
+  rollbackTypeRange.disabled = false;
+  buttonPlus.disabled = false;
 },
 
 check: function () {
   i=0;
+  console.log(screenClass);
   screenClass.forEach((item, index) => {
     this.validation(item, index)
   });
@@ -94,8 +102,8 @@ adder: function () {
 },
 
 resetValue: function () {
-  screenClass[0].querySelector('.screen .main-controls__input input[type="text"]').value = "";
-  screenClass[0].querySelector('.screen .main-controls__select select[name="views-select"]').value = "";
+  selectInputValue[0].value = "";
+  selectInput[0].value = "";
   this.screens = [];
   this.servicePricesPercent = 0;
   this.servicePricesNumber = 0;
@@ -113,13 +121,16 @@ resetValue: function () {
   totalCountOther.value = 0;
   totalFullCount.value = 0;
   totalCountRollback.value = 0;
+  rollbackTypeRange.value = 0;
+  span.textContent = rollbackTypeRange.value + '%';
   totalCount.value = 0;
 
 },
 
-step: function (event) {
-  span.textContent = event.target.value + '%';
-  this.rollback = +event.target.value;
+step: function () {
+  span.textContent = rollbackTypeRange.value + '%';
+  this.rollback = +rollbackTypeRange.value;
+  console.log(this.rollback);
 },
 
 showResult: function() {
@@ -208,12 +219,13 @@ addPrices: function() {
     this.servicePricesPercent += this.screenPrice * (this.servicesPercent[key] / 100);
   }
   this.fullPrice = this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
-  this.servicePercentPrice = this.fullPrice - Math.ceil((this.fullPrice*(this.rollback/100)));
+  this.servicePercentPrice = this.fullPrice + Math.ceil((this.fullPrice*(this.rollback/100)));
+  console.log(this.rollback);
 },
   
   
 getServicePercentPrices: function() {
-  return this.servicePercentPrice = this.fullPrice - Math.ceil((this.fullPrice*(this.rollback/100)));
+  return this.servicePercentPrice = this.fullPrice + Math.ceil((this.fullPrice*(this.rollback/100)));
 },
   
 showTypeOf: function(variabel) {
@@ -221,15 +233,14 @@ showTypeOf: function(variabel) {
 },
 
 reset: function() {
-
     console.log(this.screens);
     screenClass.forEach((item, index) => {
       if (index !== 0) {
-        screenClass[index].remove()
+        screenClass[index].remove();
       }
-      this.disabOff();
-      this.resetValue();
     });
+    this.disabOff();
+    this.resetValue();
     console.log(screenClass);
     buttonReset.style.display = 'none';
     buttonStart.style.display = 'block';
