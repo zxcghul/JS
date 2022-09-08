@@ -15,6 +15,7 @@ let screenClass = document.querySelectorAll('.screen'),
   selectInputValue = document.querySelectorAll('.screen .main-controls__input input[type="text"]'),
   span = document.querySelector('.range-value'), 
   range = document.querySelector('input[type=range]'),
+  checkbox = document.querySelectorAll('.custom-checkbox'),
   checkBind;
 let i;
 
@@ -70,6 +71,9 @@ disabOn: function () {
   selectInputValue.forEach((item) => {
     item.disabled = true;
   });
+  checkbox.forEach((item) => {
+    item.disabled = true;
+  });
   rollbackTypeRange.disabled = true;
   buttonPlus.disabled = true;
 },
@@ -81,13 +85,15 @@ disabOff: function () {
   selectInputValue.forEach((item) => {
     item.disabled = false;
   });
+  checkbox.forEach((item) => {
+    item.disabled = false;
+  });
   rollbackTypeRange.disabled = false;
   buttonPlus.disabled = false;
 },
 
 check: function () {
   i=0;
-  console.log(screenClass);
   screenClass.forEach((item, index) => {
     this.validation(item, index)
   });
@@ -96,7 +102,6 @@ check: function () {
 adder: function () {
   selectInput = document.querySelectorAll('.screen .main-controls__select select[name="views-select"]');
   selectInputValue = document.querySelectorAll('.screen .main-controls__input input[type="text"]');
-  console.log(this);
   this.check();
 
 },
@@ -124,13 +129,15 @@ resetValue: function () {
   rollbackTypeRange.value = 0;
   span.textContent = rollbackTypeRange.value + '%';
   totalCount.value = 0;
+  checkbox.forEach((item) => {
+    item.checked = false;
+  });
 
 },
 
 step: function () {
   span.textContent = rollbackTypeRange.value + '%';
   this.rollback = +rollbackTypeRange.value;
-  console.log(this.rollback);
 },
 
 showResult: function() {
@@ -220,7 +227,6 @@ addPrices: function() {
   }
   this.fullPrice = this.screenPrice + this.servicePricesPercent + this.servicePricesNumber;
   this.servicePercentPrice = this.fullPrice + Math.ceil((this.fullPrice*(this.rollback/100)));
-  console.log(this.rollback);
 },
   
   
@@ -234,14 +240,12 @@ showTypeOf: function(variabel) {
 
 reset: function() {
     console.log(this.screens);
-    screenClass.forEach((item, index) => {
-      if (index !== 0) {
-        screenClass[index].remove();
-      }
-    });
+    for (let index = 1; index < screenClass.length; index++) {
+      screenClass[index].remove();
+      screenClass = document.querySelectorAll('.screen');
+    }
     this.disabOff();
     this.resetValue();
-    console.log(screenClass);
     buttonReset.style.display = 'none';
     buttonStart.style.display = 'block';
 
