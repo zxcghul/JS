@@ -239,11 +239,12 @@ showTypeOf: function(variabel) {
 },
 
 reset: function() {
-    console.log(this.screens);
-    for (let index = 1; index < screenClass.length; index++) {
-      screenClass[index].remove();
-      screenClass = document.querySelectorAll('.screen');
-    }
+    screenClass.forEach((item, index) => {
+      if (index !== 0) {
+        item.remove();
+        screenClass = document.querySelectorAll('.screen');
+      }
+    })
     this.disabOff();
     this.resetValue();
     buttonReset.style.display = 'none';
