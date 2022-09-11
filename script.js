@@ -12,6 +12,6 @@ class Second extends First {
 }
 
 
-const MainAndSecond = new Second();
-MainAndSecond.hello()
+const mainAndSecond = new Second();
+mainAndSecond.hello()
 
