@@ -5,15 +5,9 @@ class First {
 };
 
 class Second extends First {
-
-  FirstHello() {
-    const second = new First();
-    second.hello()
-  };
-
   hello() {
-    this.FirstHello()
-    console.log(`Привет а я наследуемый метод!`);
+    super.hello();
+    console.log(`А я наследуемый метод!`);
   }
 }
 
